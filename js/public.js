@@ -104,7 +104,7 @@ function InItFx(_FxEnd, linkType) {
     var f_imgUrl = m_imgUrl;
     var f_title = m_title_1;
     var f_desc = m_desc_1;
-    $.get("/WXAJAX.ashx?" + Math.random(), { Action: 'GetFXConfig', Loc: location.href }, function (ee) {
+    $.get("/WXServices/AjaxHandler.ashx?" + Math.random(), { Action: 'GetFXConfig', Loc: location.href }, function (ee) {
         var constr = eval('(' + ee + ')');
         if (constr.debug == false) {
             wx.config({
@@ -186,7 +186,7 @@ function InItFxTwo(_FxEnd) {
             trigger: function (res) {
             },
             success: function (res) {
-                $.get("/WXAJAX.ashx?" + Math.random(), { Action: 'DJAdd', Name: m_JSName, Number: m_JSNumber, Type: 'friend', OpId: m_opid }, function (ee) {
+                $.get("/WXServices/AjaxHandler.ashx?" + Math.random(), { Action: 'DJAdd', Name: m_JSName, Number: m_JSNumber, Type: 'friend', OpId: m_opid }, function (ee) {
 
                 });
                 if (typeof _FxEnd == 'function') {
@@ -208,7 +208,7 @@ function InItFxTwo(_FxEnd) {
             trigger: function (res) {
             },
             success: function (res) {
-                $.get("/WXAJAX.ashx?" + Math.random(), { Action: 'DJAdd', Name: m_JSName, Number: m_JSNumber, Type: 'Circle', OpId: m_opid }, function (ee) {
+                $.get("/WXServices/AjaxHandler.ashx?" + Math.random(), { Action: 'DJAdd', Name: m_JSName, Number: m_JSNumber, Type: 'Circle', OpId: m_opid }, function (ee) {
 
                 });
                 if (typeof _FxEnd == 'function') {

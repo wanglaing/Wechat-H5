@@ -72,7 +72,7 @@ var nickName = '';
 $(document).ready(function () {
     InItFx(Fxend);
     m_Iscs = getParam('a');
-    $._get("/WXServices/AjaxHandler.ashx?" + Math.random(), {
+    $.get("/WXServices/AjaxHandler.ashx?" + Math.random(), {
         Action: 'DJAdd',
         Name: m_JSName,
         Number: m_JSNumber,

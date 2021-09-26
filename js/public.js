@@ -1,4 +1,4 @@
-﻿var m_Name = "";
+var m_Name = "";
 var m_Tel = "";
 var m_QianDao = "0";
 var m_JID = "";
@@ -11,23 +11,23 @@ var m_Orientation = 1;
 //活动结束标识符,1表示结束
 var m_IsOpen = 0;
 //活动名称
-var m_JSName = "我为双流种棵树，共建美好家园";
+var m_JSName = "花园城&花漾年双盘联动掀热潮丨双节好礼惠家人";
 //活动主表名GBYFGuoQHDHtml
-var m_JSNumber = "A202103_KGXCZhiSJUser";
+var m_JSNumber = "A202109_HYCCJUser";
 //活动未开始语
-var m_WKConclusion = "本轮活动还未开始啦！";
+var m_WKConclusion = "本轮活动还未开始!";
 //活动结束语
-var m_Conclusion = "本次活动已经结束！";
+var m_Conclusion = "本次活动已经结束!";
 //活动程序目录GBYFGuoQHD
-var m_Dir = 'kgxczhisjhtml';
+var m_Dir = 'hyccjhtml';
 //未参加活动标题
-var m_title_1 = "我为双流种棵树，共建美好家园";
+var m_title_1 = "花园城&花漾年双盘联动掀热潮丨双节好礼惠家人";
 //未参加活动引文
-var m_desc_1 = "守护双流，从种一棵树开始~";
+var m_desc_1 = "好又多购物中心购物卡、大闸蟹礼盒兑换券，超多精美礼品等您来领";
 //参加活动标题
-var m_title_2 = "我为双流种棵树，共建美好家园";
+var m_title_2 = "花园城&花漾年双盘联动掀热潮丨双节好礼惠家人";
 //参加活动引文
-var m_desc_2 = "守护双流，从种一棵树开始~";
+var m_desc_2 = "好又多购物中心购物卡、大闸蟹礼盒兑换券，超多精美礼品等您来领";
 //分享域名地址
 var m_domain = 'tfbjj.fengchehd.com';
 //页面地址
@@ -104,8 +104,8 @@ function InItFx(_FxEnd, linkType) {
     var f_imgUrl = m_imgUrl;
     var f_title = m_title_1;
     var f_desc = m_desc_1;
-    $.get("/WXAJAX.ashx?" + Math.random(), { Action: 'GetFXConfig', Loc: location.href }, function (ee) {
-        var constr = eval('(' + ee + ')');
+    $.get("/WXServices/AjaxHandler.ashx?" + Math.random(), { Action: 'GetPlatFXConfig', Loc: location.href }, function (ee) {
+        var constr = ee;
         if (constr.debug == false) {
             wx.config({
                 debug: constr.debug,
@@ -114,16 +114,17 @@ function InItFx(_FxEnd, linkType) {
                 nonceStr: constr.nonceStr,
                 signature: constr.signature,
                 jsApiList: [
-                                'updateAppMessageShareData',
-                                'updateTimelineShareData'
-                                ]
+                                'onMenuShareTimeline',
+                                'onMenuShareAppMessage'
+                ], // 必填，需要使用的JS接口列表
+                openTagList: ['wx-open-launch-weapp']
             });
             if (linkType == 1) {
                 f_link = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + constr.appId + '&redirect_uri=http%3A%2F%2F' + m_domain + '%2F' + m_Dir + '%2Findex.html%3fa%3d1&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect';
                 m_link = f_link;
             }
             wx.ready(function () {
-                wx.updateAppMessageShareData({
+                wx.onMenuShareAppMessage({
                     title: f_title,
                     desc: f_desc,
                     link: f_link,
@@ -131,7 +132,7 @@ function InItFx(_FxEnd, linkType) {
                     trigger: function (res) {
                     },
                     success: function (res) {
-                        $.get("/WXAJAX.ashx?" + Math.random(), { Action: 'DJAdd', Name: m_JSName, Number: m_JSNumber, Type: 'friend', OpId: m_opid }, function (ee) {
+                        $.get("/WXAJAX.ashx?" + Math.random(), { Action: 'DJAddPlat', Name: m_JSName, Number: m_JSNumber, Type: 'friend', OpId: m_opid }, function (ee) {
 
                         });
                         if (typeof _FxEnd == 'function') {
@@ -146,14 +147,14 @@ function InItFx(_FxEnd, linkType) {
                     }
                 });
 
-                wx.updateTimelineShareData({
+                wx.onMenuShareTimeline({
                     title: f_title,
                     link: f_link,
                     imgUrl: f_imgUrl,
                     trigger: function (res) {
                     },
                     success: function (res) {
-                        $.get("/WXAJAX.ashx?" + Math.random(), { Action: 'DJAdd', Name: m_JSName, Number: m_JSNumber, Type: 'Circle', OpId: m_opid }, function (ee) {
+                        $.get("/WXAJAX.ashx?" + Math.random(), { Action: 'DJAddPlat', Name: m_JSName, Number: m_JSNumber, Type: 'Circle', OpId: m_opid }, function (ee) {
 
                         });
                         if (typeof _FxEnd == 'function') {
@@ -178,7 +179,7 @@ function InItFxTwo(_FxEnd) {
     var f_title = m_title_2;
     var f_desc = m_desc_2;
     wx.ready(function () {
-        wx.updateAppMessageShareData({
+        wx.onMenuShareAppMessage({
             title: f_title,
             desc: f_desc,
             link: f_link,
@@ -186,7 +187,7 @@ function InItFxTwo(_FxEnd) {
             trigger: function (res) {
             },
             success: function (res) {
-                $.get("/WXServices/AjaxHandler.ashx?" + Math.random(), { Action: 'DJAdd', Name: m_JSName, Number: m_JSNumber, Type: 'friend', OpId: m_opid }, function (ee) {
+                $.get("/WXServices/AjaxHandler.ashx?" + Math.random(), { Action: 'DJAddPlat', Name: m_JSName, Number: m_JSNumber, Type: 'friend', OpId: m_opid }, function (ee) {
 
                 });
                 if (typeof _FxEnd == 'function') {
@@ -201,14 +202,14 @@ function InItFxTwo(_FxEnd) {
             }
         });
 
-        wx.updateTimelineShareData({
+        wx.onMenuShareTimeline({
             title: f_title,
             link: f_link,
             imgUrl: f_imgUrl,
             trigger: function (res) {
             },
             success: function (res) {
-                $.get("/WXServices/AjaxHandler.ashx?" + Math.random(), { Action: 'DJAdd', Name: m_JSName, Number: m_JSNumber, Type: 'Circle', OpId: m_opid }, function (ee) {
+                $.get("/WXServices/AjaxHandler.ashx?" + Math.random(), { Action: 'DJAddPlat', Name: m_JSName, Number: m_JSNumber, Type: 'Circle', OpId: m_opid }, function (ee) {
 
                 });
                 if (typeof _FxEnd == 'function') {

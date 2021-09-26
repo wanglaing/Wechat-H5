@@ -11,23 +11,23 @@ var m_Orientation = 1;
 //活动结束标识符,1表示结束
 var m_IsOpen = 0;
 //活动名称
-var m_JSName = "蓝光客户俱乐部6.1公益活动";
+var m_JSName = "我为双流种棵树，共建美好家园";
 //活动主表名GBYFGuoQHDHtml
-var m_JSNumber = "LGLiuYGHUser";
+var m_JSNumber = "A202103_KGXCZhiSJUser";
 //活动未开始语
 var m_WKConclusion = "本轮活动还未开始啦！";
 //活动结束语
-var m_Conclusion = "本次活动已经结束，请继续关注朗基地产官方微信号，更多精彩活动等着你";
+var m_Conclusion = "本次活动已经结束！";
 //活动程序目录GBYFGuoQHD
-var m_Dir = 'lgliuyghhtml';
+var m_Dir = 'kgxczhisjhtml';
 //未参加活动标题
-var m_title_1 = "有爱，就有光——蓝光客户俱乐部6.1公益活动";
+var m_title_1 = "我为双流种棵树，共建美好家园";
 //未参加活动引文
-var m_desc_1 = "1元购画，助力慢飞天使";
+var m_desc_1 = "守护双流，从种一棵树开始~";
 //参加活动标题
-var m_title_2 = "有爱，就有光——蓝光客户俱乐部6.1公益活动";
+var m_title_2 = "我为双流种棵树，共建美好家园";
 //参加活动引文
-var m_desc_2 = "1元购画，助力慢飞天使";
+var m_desc_2 = "守护双流，从种一棵树开始~";
 //分享域名地址
 var m_domain = 'tfbjj.fengchehd.com';
 //页面地址
@@ -104,7 +104,7 @@ function InItFx(_FxEnd, linkType) {
     var f_imgUrl = m_imgUrl;
     var f_title = m_title_1;
     var f_desc = m_desc_1;
-    $.get("/WXServices/AjaxHandler.ashx?" + Math.random(), { Action: 'GetFXConfig', Loc: location.href }, function (ee) {
+    $.get("/WXAJAX.ashx?" + Math.random(), { Action: 'GetFXConfig', Loc: location.href }, function (ee) {
         var constr = eval('(' + ee + ')');
         if (constr.debug == false) {
             wx.config({
@@ -114,8 +114,8 @@ function InItFx(_FxEnd, linkType) {
                 nonceStr: constr.nonceStr,
                 signature: constr.signature,
                 jsApiList: [
-                                'onMenuShareTimeline',
-                                'onMenuShareAppMessage'
+                                'updateAppMessageShareData',
+                                'updateTimelineShareData'
                                 ]
             });
             if (linkType == 1) {
@@ -123,7 +123,7 @@ function InItFx(_FxEnd, linkType) {
                 m_link = f_link;
             }
             wx.ready(function () {
-                wx.onMenuShareAppMessage({
+                wx.updateAppMessageShareData({
                     title: f_title,
                     desc: f_desc,
                     link: f_link,
@@ -146,7 +146,7 @@ function InItFx(_FxEnd, linkType) {
                     }
                 });
 
-                wx.onMenuShareTimeline({
+                wx.updateTimelineShareData({
                     title: f_title,
                     link: f_link,
                     imgUrl: f_imgUrl,
@@ -178,7 +178,7 @@ function InItFxTwo(_FxEnd) {
     var f_title = m_title_2;
     var f_desc = m_desc_2;
     wx.ready(function () {
-        wx.onMenuShareAppMessage({
+        wx.updateAppMessageShareData({
             title: f_title,
             desc: f_desc,
             link: f_link,
@@ -201,7 +201,7 @@ function InItFxTwo(_FxEnd) {
             }
         });
 
-        wx.onMenuShareTimeline({
+        wx.updateTimelineShareData({
             title: f_title,
             link: f_link,
             imgUrl: f_imgUrl,

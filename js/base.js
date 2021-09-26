@@ -76,7 +76,6 @@ function TiShimsg(msg) {
   $(".popGG").show();
 }
 $(document).ready(function () {
-    m_link = m_loc1 + '/' + m_Dir + '/indexgo.html?id=' + _ShareID;
   InItFx(Fxend);
     m_Iscs = getParam("a");
    
